@@ -3,12 +3,13 @@
 rem -- execute file located in omdwin\core\scripts\git,
 rem -- using omdwin's parent as the working directory
 
-pushd %~dp0
-call lib\_git.cmd
+call %~dp0lib\_git.cmd
+echo abc
+set PATH=%~dp0git;%PATH%
+echo def
+pushd %~dp0..
 
-pushd ..\..\..
-%~dp0git\%*
+%*
 
-popd
 popd
 endlocal
