@@ -1,0 +1,191 @@
+
+    ### Storytime Roadmap ###
+
+#----------------------------------------------------------------------#
+#----------------------------------------------------------------------#
+    ### Spatial ###
+
+- add Network, Node, Edge
+- add GraphMatrix
+
+- add Coord
+- add Surface
+
+- use Cache class in GraphMatrix and Surface
+
+- N-dimensional spherical metric
+
+- Construct voronoi regions on a Surface and store their connectedness in a Network
+
+
+#----------------------------------------------------------------------#
+    ### Universe ###
+
+- add Planet
+
+- Generate planet geology
+- Generate planet biomes
+- Basic climate model
+- New landmasses emerge as space expands
+- Mountains form when space contracts
+
+- add Universe
+
+- add Spacetime
+
+
+#----------------------------------------------------------------------#
+    ### History ###
+
+- Map out some prototype stories using a series of events
+- What are the rules for generating a new event?
+- Event propogation, lifecycle, perturbation energy
+
+- Derive the state of the universe from a temporal slice of propogating events
+
+
+#----------------------------------------------------------------------#
+    ### Actors ###
+
+- Reason about and perform operations on clusters of entities at once
+
+    Game Systems
+- Population Growth
+- Actor advancement
+- Trust Networks
+- Labor (Crafting, Farming)
+- Trade
+- Institutions
+- Ideas
+- Technology
+
+
+#----------------------------------------------------------------------#
+    ### Engine ###
+
+- Step forward one turn
+
+- Save and load state
+
+- Use neural network to reduce the complexity of evaluating the state by identifying common features and causal links
+    - Attention process
+    - Episodic memory
+    - Dynamic Memory Network
+
+
+#----------------------------------------------------------------------#
+#----------------------------------------------------------------------#
+    ### UnrealEngine Client ###
+
+- Embed python into a C++ program and pass information between them
+
+- planar tile map
+- spherical tile map
+
+- basic Game UI widgets
+- Main Menu screen
+- New game screen
+- Options screen
+- In-game report screens
+
+- Networking
+
+
+#----------------------------------------------------------------------#
+    ### Victory Conditions ###
+
+- Domination
+    - Military          - Conquer everyone through superior physical force
+    - Influence         - Control those in power through blackmail, money/debt, favors, etc
+    - Ideological       - Religious, philosophical, and cultural influence over the will of the populace
+    - Industrial        - Make all economies dependant on your production
+
+- Peaceful
+    - Prosperity        - 100% Approval rating
+    - Cooperation       - pffft, you don't win by cooperating! (Everyone wins, but I won the most.)
+    X Science Victory   - Exodus - escape the universe before time runs out (not available)
+
+- Entropic Universe
+    - Hunger Games      - Last faction standing before the food runs out
+
+- Collapsing Universe
+    - No Victory        - Plenty of resources, but everyone still loses
+
+#----------------------------------------------------------------------#
+    ### Game Modes ###
+
+- Scenarios
+    - Adventure - Control a small band of lowlifes as a faction struggling to get by. Mission-based
+        - Fantasy
+        - Cyberpunk
+
+    - Dynasty - Control a family that tries to maintain its wealth through the ages.
+    - Legendary Hero - Explore the world as a single entity
+    - Climate Change
+
+- Multiplayer
+    - Faction vs Faction
+        Empire vs Empire
+        Seize the State
+        Corporate Warfare
+    - Assymetric configurations
+        Revolution (1 vs Many)
+
+    - One player plays a faction, and everyone else is a member of the faction (twitch integration)
+    - Co-op and PVP mission-based scenarios taking place in a recurring world
+
+
+#----------------------------------------------------------------------#
+    ### Art and Music ###
+
+- UI assets
+- Terrain assets
+- Actor and game piece art
+- Fluff
+- Logo
+
+- Background music
+- UI sound effects
+- Game sound effects
+- Voice acting
+
+- Write documentation
+- Create in-game fiction, write copy
+
+- Finalize game name
+
+
+#----------------------------------------------------------------------#
+    ### Gameplay testing and QA ###
+
+- Set up git server
+- automatically run tests on commit
+
+- Create package for limited distribution to test gameplay systems
+
+- Test on many different computers to find platform/hardware specific issues
+
+
+#----------------------------------------------------------------------#
+    ### Operations, Marketting, and Distribution ###
+
+- Website
+- Information Security
+
+- basic modding support
+- open-source storytime engine
+- add ability to import new game assets into UE client
+- add plugin-based modification support
+
+- Steam integration
+- Twitch integration
+
+- Crowdfunding
+- Matchmaking server
+- Sponsor twitch presense
+
+- Customer Technical Support
+- New release Updates
+
+
+#----------------------------------------------------------------------#

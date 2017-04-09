@@ -1,0 +1,10 @@
+OMD for Windows
+
+--------------------------------------------------------------------------
+
+ToDo: requirements.txt - Environment repositories track dependencies
+ToDo: Check that required utilities and onetick packages are installed
+ToDo: Automatically fetch components specified in requirements.txt when deploying
+ToDo: build system should support fully-local install by adding packaged dependencies to local git repos
+
+--------------------------------------------------------------------------

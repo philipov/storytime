@@ -1,0 +1,84 @@
+    Game Name:
+"Storytime" <- name of the simulation
+"Dynasty Mastermind"
+"Will to Power"
+
+
+Literacy allows centralized distribution of ideas
+How is knowledge passed down generations
+
+Land allocation
+Genealogy
+Social Networks
+
+"The nature of reality appears to us in layers"-sean carrol
+
+"Any day now, we'll understand everything" vs "We don't understand anything, so anything goes"
+
+https://www.youtube.com/watch?v=pLbSlC0Pucw  The Nature of Reality: A Dialogue Between a Buddhist Scholar and a Theoretical Physicist
+
+Legend points are XP for elites
+
+Rate of infection is (1/T) log_n S, T is the temperature. Fast Scrambling.
+
+
+(8:32:59 PM) firstadvent: I think I found a good mechanism to do technological advancement to replace blue bar management in civ. Technological advances will be random events, but the probability of the event will depend on how many actors in the society are working on research, and how well connected they are.
+(8:33:40 PM) firstadvent: scientists will be keyed to specific technologies, so depending on how you allocate resources to preserving technology will determine where the next research will go
+(8:34:13 PM) firstadvent: it is important for my model that it's possible to forget technologies, and technology is stored in people
+(8:34:26 PM) firstadvent: therefore technology is stored in people*
+(8:34:45 PM) firstadvent: teaching the next generation is a game mechanic
+(8:35:08 PM) firstadvent: and so research will be tied to that
+
+Simplify the system to be an abstracted representation
+
+Individual's skills atrophy if they are not continuously exercised.
+One the one hand, specialized progress down a career path becomes more difficult.
+On the other, context switching is very expensive, so generalists are not overwhelmingly rewarded
+
+
+
+Elements / Zodiac / Deities
+
+Test AI for Impulsivity vs Risk-seeking
+    - Implusive behavior is prone to taking the earliest possible action, without regard to risk
+    - Risk-seeking behavior selects for the biggest gamble with the highest reward consistently
+
+
+https://www.rockpapershotgun.com/2013/11/08/wot-i-think-flashpoint-campaigns-red-storm/
+    Time travelling
+Suppose turns are not simultaneous, but generalize the notion of initiative order
+Time dilation means the person moving slower through time gets turns less frequently than someone moving faster
+Timetravel into the future is possible by moving near the speed of light, therefore slowing down time.
+This simply means you don't get to take turns very often.
+
+
+The time-period when the world is
+
+The description of the formation of the universe, and either its eventual collapse or heat death
+is the top level of all the historical loops of rising and falling action
+the first smaller loop is the high curvature phase of the planet, a Mythic Age.
+
+the outlines of history are generated for all time without any player interaction.
+This process should not follow a strict turn-based pattern,
+
+however, every time the surface grows enough to __init__ a new voronoi cell should be
+represented by an event, and possibly a catastrophic one. Especially once they start shrinking.
+
+the universe begins well below the dividing area, and
+time moves very quickly for the player in the early years, when it's only a single village.
+
+As the village grows, space expands and the player's time slows down.
+
+- Conservation of Communication: If technology stays the same,
+an increase in the number of actors controlled means a decrease in the flow of time.
+    The greater the mass, the slower the time?
+
+There is a moment when the extent of space will exceed the communication horizon.
+This is when society splinters into different civilizations.
+
+1) Only 1 region - family
+2) Everything inside communication horizon - village
+3) Initial tech jump - consolidation of the tribes as a kingdom
+
+The more you level up, the harder things become.
+This should scale so that levelling up becomes scary.

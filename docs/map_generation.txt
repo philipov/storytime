@@ -1,0 +1,13 @@
+generate the voronoi map
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Voronoi.html
+
+check if a point is inside a voronoi cell / find the voronoi cell for a point
+
+http://stackoverflow.com/questions/29311682/finding-if-point-is-in-3d-poly-in-python
+http://stackoverflow.com/questions/21502011/finding-out-if-a-point-is-inside-a-voronoi-cell
+
+http://stackoverflow.com/questions/17857021/finding-voronoi-regions-that-contain-a-list-of-arbitrary-coordinates
+https://www.jasondavies.com/maps/voronoi/
+
+
+http://mathworld.wolfram.com/SphericalDistance.html

@@ -1,0 +1,3 @@
+echo DEBUG (%*)
+cd
+echo.

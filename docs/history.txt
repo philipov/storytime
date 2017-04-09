@@ -1,0 +1,38 @@
+
+
+Events form a network of causes and consequences
+Events have a propogation speed (light cone) that determines how quickly they can interact with entities
+
+Events are the result of interactions between entities, or interactions between events.
+Events could be thought of as a type of temporal entity
+
+[Don't try to solve the creation of the universe first. Begin with birth events.]
+
+Event scope can be 'specific' or 'aggregate'
+
+Two entities in a region have a chance to interact proportional to their coupling energy.
+
+Try to describe the behavior of clusters of entities using statistical mechanics.
+
+Events are themselves entities that can interact with each other. How should this be described?
+
+Event influence cones propogate at the speed of information.
+In physics, the speed of information is typically light, and so we talk about light cones.
+In human terms, it is significantly slower than light, and not a constant
+it is a function of the method of propogation
+
+We are always moving at the speed of light, but mostly through the time dimension.
+
+It takes time to send messages to actors, and yet more time to find out news about the results of their actions
+The speed of communication technology should have a direct impact on the responsiveness of the game.
+To make up for the lack of responsiveness at a distance, there should be a richer world of response at a local dilate
+
+On the other hand, this also serves to gate complexity over the course of the game.
+The world begins populated, but closed off because the speed of information is slow.
+As the speed of information increases, the world opens up, and this process is world discovery.
+This should have some representation in how the world is drawn.
+
+Space begins highly curved and flattens out over time, but the speed of communication also begins slow, so it may be hard to see that.
+
+An object in motion stays in motion
+Is history a phase space?
