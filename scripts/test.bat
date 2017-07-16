@@ -1,9 +1,25 @@
 @setlocal
-@echo OFF
+@ECHO off
+rem ---------------------------------
 
-set COMMAND=pytest tests\%*
+set THIS_PATH=%~dp0
+set PROJECT_PATH=%THIS_PATH%..
 
-echo COMMAND    %COMMAND%
+set TESTS_PATH=%PROJECT_PATH%\tests
+set TMP_PATH=%TESTS_PATH%\__tmp__
 
-%COMMAND%
-endlocal
+set PYTHONPATH=%TESTS_PATH%;%PROJECT_PATH%;%PYTHONPATH%
+@pushd %PROJECT_PATH%
+
+
+rem ---------------------------------
+where python
+rem mkdir %TMP_PATH%
+
+py.test %TESTS_PATH%\%* --basetemp=%TMP_PATH%
+call sh\win\clean.bat
+
+
+rem ---------------------------------
+@popd
+@endlocal

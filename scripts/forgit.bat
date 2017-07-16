@@ -7,7 +7,7 @@ set CMD=withgit %*
 
 rem -------------------------------------
 
-call %CMD% storytime-lib
+call %CMD% storytime
 
 
 rem -------------------------------------

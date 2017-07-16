@@ -38,7 +38,7 @@ setup(
         'console_scripts' : [ "".join([ 'cog', '=', PROJECT_NAME, '.__main__.main' ]) ],
     },
 
-    requires = [],
+    requires = ['numpy', 'scipy', 'sympy' ],
 
     classifiers=[
         'Environment :: Console',
