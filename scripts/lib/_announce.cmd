@@ -7,8 +7,8 @@ call :createSub
 call :echo "PWD            "
 cd
 echo.
-echo SCRIPT_DIR     %SCRIPT_DIR%
-echo PYTHON         %PATH_PYTHON%
+echo SCRIPT_DIR     %PATH_SCRIPTS%
+echo PYTHON         %PYTHONHOME%
 echo PYTHONPATH     %PYTHONPATH%
 echo GIT            %PATH_GIT%
 echo PATH           %PATH%

@@ -9,7 +9,7 @@ description
 
 from .time import Cycle  # abstract enum
 
-from .time import Year
+from .time import GameTurn
 
 #----------------------------------------------------------------------#
 
@@ -64,8 +64,21 @@ from .history import History
 
 #----------------------------------------------------------------------#
 
+from .universe import PhysicalLaws
+
+from .universe import Location
+from .universe import Zone
+
+from .universe import ZoneMap
+from .universe import Layers
+
 from .universe import Planet
+from .universe import Orbit
+from .universe import StarSystem
+from .universe import Galaxy
+
 from .universe import Universe
+from .universe import Spacetime
 
 #----------------------------------------------------------------------#
 
@@ -83,6 +96,8 @@ from .out import dprint
 from .out import display
 
 #----------------------------------------------------------------------#
+
+import storytime.setting
 
 #----------------------------------------------------------------------#
 

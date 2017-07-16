@@ -117,14 +117,22 @@ class __Surface :
     def test__Voronoi(self):
         surface = self.prepare_surface0( )
 
-        # assert not self.debug
+        dprint( surface )
+        distance_array = surface.distance_matrix( )
+        print( distance_array )
+
+        print( "regions:", surface._voronoi.vertices )
+        print( "vertices:", surface._voronoi.vertices )
+
+
+        assert not self.debug
 
 #####################
     surface = Surface()
     sites = [
         Coord()
     ]
-    debug = True
+    debug = False
 
 
 from storytime.spatial.surfaces import SurfacePlane
@@ -135,17 +143,42 @@ class __SurfacePlane( __Surface ) :
     ,   CoordR([5, 0])
     ,   CoordR([3, 4])
     ]
-    debug = True
+    debug = False
 
 
 from storytime.spatial.surfaces import SurfaceSphere2
 class __SurfaceSphere2( __Surface ) :
     surface = SurfaceSphere2(1)
     sites = [
-        CoordS2([45, 90])
-    ,   CoordS2([45, 91])
+        CoordS2([0,  90])
+    ,   CoordS2([0, -90])
     ]
     debug = True
+
+
+#----------------------------------------------------------------------#
+#
+# def test__SphericalVoronoi():
+#     """
+#
+#     """
+#     sites = [
+#         CoordS2( [0,  90] )
+#       , CoordS2( [0, -90] )
+#     ]
+#
+#     surface = SurfaceSphere2( sites )
+#
+#     dprint( surface )
+#     distance_array = surface.distance_matrix( )
+#     print( distance_array )
+#
+#     print( "regions:", surface._voronoi.vertices )
+#     print( "vertices:", surface._voronoi.vertices )
+#
+#
+#     assert False
+
 
 
 #----------------------------------------------------------------------#

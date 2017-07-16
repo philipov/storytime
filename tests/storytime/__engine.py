@@ -26,28 +26,51 @@ import pytest
 
 
 #----------------------------------------------------------------------#
-
-
-from storytime.engine import tick_controller
-def test__tick_controller( universe ):
-    tick_event = tick_controller( universe )
-    tick_event(universe.gametime)
-
-
-from storytime.engine import player_controller
-def test__player_controller( universe ):
-    player_event = player_controller( universe )
-
-    player_event( universe.gametime, "t" )
-    player_event( universe.gametime, "e" )
-    stop_iteration = player_event( universe.gametime, "q" )
-
-
-#----------------------------------------------------------------------#
-
 from storytime.engine import Engine
-def test__Engine():
-    engine = Engine()
+
+def test__Engine( start_time ) :
+    engine = Engine( start_time )
+
+    # assert False
 
 
 #----------------------------------------------------------------------#
+from storytime.engine import tick_controller
+
+def test__tick_controller( engine, next_time ):
+    tick_event = tick_controller( engine )
+    with pytest.raises(RuntimeError):
+        tick_event( next_time )
+
+    engine.initialize( next_time )
+    tick_event( next_time )
+
+    # assert False
+
+
+#----------------------------------------------------------------------#
+from storytime.engine import player_controller
+def test__player_controller( engine, next_time ):
+
+    player_event = player_controller( engine )
+    player_event( next_time, "t" )
+    player_event( next_time, "e" )
+
+    with pytest.raises( StopIteration ) :
+        player_event( next_time, "q" )
+
+    # assert False
+
+
+#----------------------------------------------------------------------#
+from storytime.engine import loop_fixed
+
+def test__loop_fixed(start_time, end_time, engine ) :
+    engine.initialize( start_time )
+    tick_event = tick_controller( engine )
+    loop_fixed(start_time, end_time, tick_event)
+
+    # assert False
+
+#----------------------------------------------------------------------#
+

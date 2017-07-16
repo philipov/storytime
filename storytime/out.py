@@ -13,7 +13,7 @@ def dprint( obj ) :
     string = ""
 
     if hasattr(obj, "__dprint__"):
-        string += obj.__dprint__( )
+        string += obj.__dprint__
 
     elif isinstance( obj, list ):
         if len(obj) > 0:

@@ -1,0 +1,26 @@
+Game Modes:
+-----------------------------------
+
+Nations (Free For All)
+Civilizations (Teams)
+
+Revolution (One vs Many)
+Sedition (Mafia)
+
+Tug of War (How?)
+Capture the Flag (How?)
+
+-----------------------------------
+
+A game mode requires defining:
+-   Map Type
+-   Map Generator
+-   Game Entities
+-   Simulation Model
+-   Initial Conditions
+-   Victory Conditions
+
+
+
+
+-----------------------------------

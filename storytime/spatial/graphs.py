@@ -166,7 +166,7 @@ class Network :
         string += ">"
         return string
 
-
+    @property
     def __dprint__( self ) :
         string = str(self)
         for node in self._nodes:
@@ -349,7 +349,7 @@ class GraphMatrix :
         string = str( self._matrix )
         return string
 
-
+    @property
     def __dprint__(self):
         string = ""
         for (i, j, v) in self.edges( ) :

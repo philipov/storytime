@@ -52,6 +52,9 @@ class Coord :
 
 #---------------------------------------------------------------------#
 
+def metric_euclidean( coordinates_array ) :
+    return pdist( coordinates_array )
+
 class CoordR( Coord ) :
     """rectangular coordinate"""
 
@@ -68,12 +71,51 @@ class CoordR( Coord ) :
     def __str__( self ) :
         return "<r" + str( self.shape ) + " " + str( self.vector ) + ">"
 
+    def to_spherical(self, origin):
+        coord = None
 
-def metric_euclidean( coordinates_array):
-    return pdist( coordinates_array )
+        return coord
 
 
 #---------------------------------------------------------------------#
+from .units import degrees_to_radians
+
+def metric_sphere2( coordinates_array, radius=1, units=degrees_to_radians ) :
+    """
+    2 dimensions only
+    Compute a distance matrix of the coordinates using a spherical metric.
+    source: http://codereview.stackexchange.com/questions/98275/compute-spherical-distance-matrix-from-list-of-geographical-coordinates
+    :param coordinates_array: np.ndarray with shape (n,2); latitude is in 1st col, longitude in 2nd.
+    :param radius: convert arclength to distance units
+    :param units: function that converts array of (phi,theta)->(radians,radians)
+    :returns distance_mat: np.ndarray with shape (n, n) containing distance in km between coords.
+    """
+
+    print( coordinates_array )
+
+    # Unpacking coordinates
+    latitudes = coordinates_array[:, 0]
+    longitudes = coordinates_array[:, 1]
+    n_pts = coordinates_array.shape[0]
+
+    #convert coordinates to radians.
+    (phi_values, theta_values) = units( latitudes, longitudes )
+
+    # Expand phi_values and theta_values into grids
+    theta_1, theta_2 = np.meshgrid( theta_values, theta_values )
+    theta_diff_mat = theta_1 - theta_2
+
+    phi_1, phi_2 = np.meshgrid( phi_values, phi_values )
+
+    # Compute spherical distance from spherical coordinates
+    angle = (np.sin( phi_1 ) * np.sin( phi_2 ) * np.cos( theta_diff_mat ) +
+             np.cos( phi_1 ) * np.cos( phi_2 ))
+    arc = np.arccos( angle )
+
+    # Multiply by earth's radius to obtain distance in km
+    return arc * radius
+
+#####################
 
 class CoordS2( Coord ) :
     """spherical coordinate with radius and recursive center"""
@@ -136,56 +178,24 @@ class CoordS2( Coord ) :
         return string
 
 
-#####################
-
-from .units import degrees_to_radians
-def metric_sphere2( coordinates_array, radius=1, units=degrees_to_radians ) :
-    """
-    2 dimensions only
-    Compute a distance matrix of the coordinates using a spherical metric.
-    source: http://codereview.stackexchange.com/questions/98275/compute-spherical-distance-matrix-from-list-of-geographical-coordinates
-    :param coordinates_array: np.ndarray with shape (n,2); latitude is in 1st col, longitude in 2nd.
-    :param radius: convert arclength to distance units
-    :param units: function that converts array of (phi,theta)->(radians,radians)
-    :returns distance_mat: np.ndarray with shape (n, n) containing distance in km between coords.
-    """
-
-    print(coordinates_array)
-
-    # Unpacking coordinates
-    latitudes = coordinates_array[:, 0]
-    longitudes = coordinates_array[:, 1]
-    n_pts = coordinates_array.shape[0]
-
-    #convert coordinates to radians.
-    (phi_values, theta_values) = units(latitudes, longitudes)
-
-    # Expand phi_values and theta_values into grids
-    theta_1, theta_2 = np.meshgrid( theta_values, theta_values )
-    theta_diff_mat = theta_1 - theta_2
-
-    phi_1, phi_2 = np.meshgrid( phi_values, phi_values )
-
-    # Compute spherical distance from spherical coordinates
-    angle = (np.sin( phi_1 ) * np.sin( phi_2 ) * np.cos( theta_diff_mat ) +
-             np.cos( phi_1 ) * np.cos( phi_2 ))
-    arc = np.arccos( angle )
-
-    # Multiply by earth's radius to obtain distance in km
-    return arc * radius
+    def to_rectangular(self):
+        x = self.radius * np.sin( self.vector[0] ) * np.cos( self.vector[1] )
+        y = self.radius * np.sin( self.vector[0] ) * np.sin( self.vector[1] )
+        z = self.radius * np.cos( self.vector[0] )
+        coord = CoordR([x,y,z])
+        return coord
 
 
 #---------------------------------------------------------------------#
 
-
 #---------------------------------------------------------------------#
-
 class TilePolygon:
     """Provide geometric information relevant to rendering and UI."""
 
     def __init__(self, position, vertices):
         self.position = position
         self.vertices = []
+
 
     def intesects(self, line) -> bool:
         """
@@ -208,9 +218,19 @@ class TilePolygon:
             return False
         return NotImplemented
 
+    def area(self) -> float :
+        """
+        Calculate the area of the polygon
+        General Case: area of triangles
+        Voronoi case: http://www.personal.kent.edu/~rmuhamma/Compgeometry/MyCG/CG-Applets/VoroArea/voroarcli.htm
+        """
+
+        if len( self.vertices ) > 0 :
+            return 0
+        return NotImplemented
+
 
 #---------------------------------------------------------------------#
-
 class Surface:
     """Sparse surface equiped with voronoi tiling"""
 
@@ -242,7 +262,7 @@ class Surface:
         string += ">"
         return string
 
-
+    @property
     def __dprint__(self):
         string = str(self)
         for point in self._sites:
@@ -250,11 +270,13 @@ class Surface:
         return string
 
 
+    #####################
     def site_add( self, *points ) :
         for point in points:
             if hasattr(point, 'index'):
                 point.index = len( self._sites )
             self._sites.append( point )
+        self._calculate_voronoi()
 
     def site_containing( self, point ):
         closest_site = self._sites.pop(0)
@@ -269,36 +291,41 @@ class Surface:
                 closest_site = site
         return closest_site
 
+    def _calculate_voronoi( self ) :
+        if self._voronoi_class is None :
+            raise RuntimeError( "Unable to calculate voronoi regions without specifying voronoi_class:", self )
+
+        elif len( self._sites ) == 0 :
+            self._voronoi = None
+
+        else :
+            self._voronoi = self._voronoi_class( self._sites )
+
     def site_area(self, site_index):
         site = self._sites[site_index]
         # cell area is the sum of the areas of all ridge vertex triangles
         return NotImplemented
 
-
-    def distance_matrix(self):
-        return NotImplemented
-
-    def tiles(self):
-        tiles = self
-        yield NotImplemented
-
-    def _cell_add(self, site_index ):
+    def _cell_add( self, site_index ) :
         cell = self
         return NotImplemented
 
-    def _calculate_voronoi(self):
-        if self._voronoi_class is None:
-            raise RuntimeError("Unable to calculate voronoi regions without specifying voronoi_class:", self)
+    def tiles( self ) :
+        tiles = self
+        yield NotImplemented
 
-        elif len(self._sites) == 0:
-            self._voronoi = None
-
-        else:
-            self._voronoi = self._voronoi_class(self._sites)
+    def sites_array(self):
+        return []
 
 
-#####################
 
+    #####################
+    def distance_matrix(self):
+        raise NotImplementedError
+
+
+
+#---------------------------------------------------------------------#
 class SurfacePlane( Surface ) :
     """Sparse grid equiped with a network of voronoi regions"""
 
@@ -328,13 +355,16 @@ class SurfacePlane( Surface ) :
     def size_y( self ) :
         return self._extent[1]
 
+    def sites_array( self ) :
+        coord_list = None
+        for site in self._sites :
+            pass
 
     def distance_matrix( self ) :
         return NotImplemented
 
 
-#####################
-
+#---------------------------------------------------------------------#
 class SurfaceSphere2( Surface ) :
     """Voronoi-equiped sparse spherical grid"""
 
@@ -344,7 +374,7 @@ class SurfaceSphere2( Surface ) :
                 ):
         super().__init__( radius
                         , sites
-                        , voronoi_class=CoordR.voronoi_class
+                        , voronoi_class=CoordS2.voronoi_class
                         )
 
     def __str__( self ) :
@@ -359,6 +389,13 @@ class SurfaceSphere2( Surface ) :
     def radius(self):
         return self._extent
 
+    def sites_array( self ) :
+        coord_list = None
+        for site in self._sites :
+            coord = site.to_rectangular()
+
+
+        return np.array(coord_list)
 
     def distance_matrix( self ) :
         return NotImplemented

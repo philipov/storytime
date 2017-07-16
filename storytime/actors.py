@@ -9,7 +9,7 @@ from copy import deepcopy
 from enum import Enum
 
 from .spatial.surfaces import Coord
-from .time import Year
+from .time import GameTurn
 
 from .meta import equality_of
 from .meta import prepare_ndarray
@@ -51,7 +51,7 @@ class Entity:
 
     def __init__( self,
                   position:Coord = None,
-                  creation_turn:Year = None,
+                  creation_turn:GameTurn = None,
                   features:list = None,
                   index:int = None
                   ):

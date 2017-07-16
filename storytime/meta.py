@@ -2,9 +2,10 @@
 # storytime
 
 '''
-class helpers
+utilities
 '''
 
+#ToDo: Load Enumeration values from XML file
 
 #----------------------------------------------------------------------#
 
@@ -114,10 +115,13 @@ def prepare_object( parameter, cls=object, deepcopy=False, args=None, **kwargs )
 
     obj = None
     if parameter is None :                  # default object
-        if args is None:
-            args = list()
+        if args is None :
+            args = list( )
         obj = cls(*args, **kwargs)
-
+    # if isinstance(parameter, type):
+    #     if args is None :
+    #         args = list( )
+    #     obj = parameter( *args, **kwargs )
     elif inspect.isclass(cls):
         if isinstance( parameter, cls ) :   # strict type
             if deepcopy:

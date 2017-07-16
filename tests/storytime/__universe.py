@@ -35,3 +35,15 @@ def test__Universe( ) :
 
 
 #----------------------------------------------------------------------#
+
+
+from storytime.universe import Spacetime
+from storytime.time import GameTurn
+from storytime.time import __Season as Season
+
+def test__Spacetime( ) :
+    universe = Universe()
+    start_time = GameTurn( Season )
+    spacetime = Spacetime( start_time, universe )
+
+#----------------------------------------------------------------------#

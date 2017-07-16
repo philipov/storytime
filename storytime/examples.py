@@ -5,17 +5,14 @@
 description
 '''
 
-from .time import Year
+from .time import GameTurn
 from .spatial.surfaces import CoordR
 from .actors import Actor
 
-from .history import Event
-from .history import History
 from .universe import Planet
 from .universe import Universe
 
 from .setting import Season
-from .setting import Theme
 from .setting import Animal
 
 
@@ -23,19 +20,14 @@ from .setting import Animal
 
 def sample_universe( size_x=20, size_y=10 ) :
     # define time
-    start_time = Year( 0, Season.NULL )
-    end_time = Year( 10, Season.SUMMER )
+    start_time = GameTurn( 0, Season.SUMMER )
+    end_time = GameTurn( 10, Season.SUMMER )
 
     # construct terrain
-    terrain = Planet( 10, 10 )
+    planet = Planet( 10 )
 
     ### initialize Universe container
-    universe = Universe( start_time, terrain )
-
-    ### begin history
-    history = History( )
-    event0 = Event( Theme.START )
-    history.add_event( event0 )
+    universe = Universe( planet )
 
     ### initial population
     universe.add_entity( Actor( CoordR( [3, 3] ), start_time, features=[Animal.FEMALE] ) )
@@ -50,5 +42,12 @@ def sample_universe( size_x=20, size_y=10 ) :
 from .engine import Engine
 
 
-def sample_engine( ) :
-    engine = Engine( )
+def sample_engine( start_time ) :
+    engine = Engine( start_time )
+
+
+
+def new_game( start_time, universe ):
+    engine = Engine( start_time, universe )
+
+    return engine

@@ -76,7 +76,7 @@ class PlotAction( Cycle ):
 
 #----------------------------------------------------------------------#
 
-from .time import Year
+from .time import GameTurn
 
 class Event:
     """A thematic component of a causal network"""
@@ -85,8 +85,8 @@ class Event:
                   theme:Feature,
                   value = None,
                   target = None,
-                  start_time: Year = None,
-                  end_time: Year = None,
+                  start_time: GameTurn = None,
+                  end_time: GameTurn = None,
                   participants: list = None,
                   causes:list = None,
                   consequences:list = None,

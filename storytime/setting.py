@@ -12,39 +12,16 @@ from enum import unique
 
 from .time import Cycle
 
-@unique
 class Season( Cycle ) :
-    NULL   = 0
     WINTER = 1
     SUMMER = 2
 
 
-@unique
-class Turn( Cycle ) :
-    NULL = 0
-    DEAL = 1
+
+class Battle( Cycle ) :
+    DEAL = 9
     BET  = 10
-    DRAW = 20
-
-
-#----------------------------------------------------------------------#
-
-class Fundamental( Enum ):
-    TOTAL_ENERGY        = 100000
-    PLANK               = 0.00001
-    ENTROPY             = 1
-    GRAVITY             = 1.0
-    FINE_STRUCTURE      = 10
-
-    SPEED_OF_LIGHT      = 1000.0
-    SPEED_OF_SOUND      = 100.0
-
-    PLOT_FORCE          = 2.0
-    INITIAL_FORCE       = 100.0
-
-    TIME_FRICTION       = 10.0
-    LAND_FRICTION       = 1.0
-    OCEAN_FRICTION      = 10.0
+    DRAW = 15
 
 
 #----------------------------------------------------------------------#
@@ -216,3 +193,28 @@ class Theme( Feature ) :
 
 
 #----------------------------------------------------------------------#
+
+class Constants :
+    TOTAL_ENERGY = 100000
+    PLANK = 0.00001
+    ENTROPY = 1
+    GRAVITY = 1.0
+    FINE_STRUCTURE = 10
+
+    SPEED_OF_LIGHT = 1000.0
+    SPEED_OF_SOUND = 100.0
+
+    PLOT_FORCE = 2.0
+    INITIAL_FORCE = 100.0
+
+    TIME_FRICTION = 10.0
+    LAND_FRICTION = 1.0
+    OCEAN_FRICTION = 10.0
+
+    TILE_AREA = 100.0
+    TILE_VARIATION = 10.0
+    TILE_COUPLING = 1.0
+
+
+#----------------------------------------------------------------------#
+

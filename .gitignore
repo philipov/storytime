@@ -1,15 +1,9 @@
 .idea/
 .cache/
 __pycache__/
-*.log
 
-data/*/
+
+data/saves/
 logs/*/
-python/*/
-onetick/*/
-pkg/*/
 
-/core/secrets/license.info
-/core/secrets/global
-/core/secrets/_auth.cmd
-/core/secrets/license.dat
+

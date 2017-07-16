@@ -11,3 +11,14 @@ https://www.jasondavies.com/maps/voronoi/
 
 
 http://mathworld.wolfram.com/SphericalDistance.html
+
+http://stackoverflow.com/questions/10192883/find-voronoi-tessellation-with-area-constraints
+http://kiwi.atmos.colostate.edu/BUGS/geodesic/text.html
+https://www.gamedev.net/resources/_/technical/math-and-physics/particle-systems-using-constrained-dynamics-r4170
+
+http://devmag.org.za/2009/05/03/poisson-disk-sampling/
+
+https://www.gamedev.net/resources/_/technical/general-programming/game-engine-containers-handle-map-r4495
+https://www.gamedev.net/resources/_/technical/game-programming/how-to-design-the-data-structure-for-a-turn-based-game-r4164
+
+https://www.gamedev.net/resources/_/business/production-and-management/estimating-effort-for-small-projects-r3968
