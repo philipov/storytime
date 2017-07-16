@@ -25,7 +25,7 @@ __description__ = "".join(list(open(str(PROJECT_PATH/'DESCRIPTION'))))
 ###
 setup(
     name            = PROJECT_NAME,
-    packages        = ['storytime', 'storytime.entities', 'storytime.spacial'],
+    packages        = ['storytime', 'storytime.entities', 'storytime.spatial'],
     version         = __version__,
 
     description     = __description__,
