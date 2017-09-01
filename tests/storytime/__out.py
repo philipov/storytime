@@ -1,5 +1,4 @@
-#!/Anaconda3/python
-# storytime
+
 
 '''
 description
@@ -9,8 +8,8 @@ description
 #----------------------------------------------------------------------#
 
 from storytime.out import display
-def test__display(universe):
-    display(universe)
+def test__display():
+    pass
 
 
 #----------------------------------------------------------------------#

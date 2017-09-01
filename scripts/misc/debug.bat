@@ -1,3 +1,0 @@
-echo DEBUG (%*)
-cd
-echo.
