@@ -1,4 +1,4 @@
-# storytime.belief
+# storytime.agent.belief
 
 """
 """

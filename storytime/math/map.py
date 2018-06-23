@@ -72,7 +72,7 @@ class Location:
 #----------------------------------------------------------------------------------------------#
 
 ##############################
-class VMap2D:
+class VorMap2D:
     ''' 2D voronoi tiling
         immutable, update methods return a new instance
         line and vertex calculation

@@ -32,6 +32,7 @@ options = dict(
     packages = [
         'storytime',
         'storytime.agent',
+        'storytime.math',
         'storytime.world',
     ],
 
@@ -46,9 +47,9 @@ options = dict(
         ],
     },
     install_requires = [
-        'powertools',
-        'curio',
-        'click',
+        'powertools',   # utilities
+        'curio',        # async
+        'click',        # console
 
         'numpy',
         'pandas',

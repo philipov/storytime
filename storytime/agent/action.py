@@ -1,4 +1,4 @@
-# storytime.move
+# storytime.agent.action
 
 """
 """
@@ -10,7 +10,7 @@ log = AutoLogger()
 
 #----------------------------------------------------------------------------------------------#
 
-class Move:
+class Action:
     ''' an action that can be taken by an agent
     '''
 

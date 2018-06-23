@@ -8,8 +8,7 @@
 from ._agent import Agent
 
 from .belief import Belief
-
-from .move import Move
+from .action import Action
 from .plan import Plan
 
 from .trait import (

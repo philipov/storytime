@@ -26,6 +26,8 @@ class Scenario:
     def create_world(self):
         raise NotImplementedError()
 
+    def add_actor(self, actor_cls, *args, **kwargs):
+        pass
 
 
 #----------------------------------------------------------------------------------------------#
@@ -35,7 +37,6 @@ class Test(Scenario):
     '''
 
     def create_world(self):
-        self.actors['1'] = Agent()
-        self.actors['2'] = Agent()
+        self.actors[(Agent,1)] = Agent()
+        self.actors[(Agent,2)] = Agent()
 
-        return self.world

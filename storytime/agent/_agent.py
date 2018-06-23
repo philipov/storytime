@@ -1,4 +1,4 @@
-# storytime.agent
+# storytime.agent._agent
 
 """ agent performs speculative computation while it's not their turn
 """

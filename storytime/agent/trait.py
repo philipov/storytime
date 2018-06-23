@@ -1,4 +1,4 @@
-# storytime.trait
+# storytime.agent.trait
 
 """
 """
@@ -21,8 +21,8 @@ class Trait:
     def __init__(self):
         pass
 
-    moves = []
-    prerequisites = []
+    actions         = []
+    prerequisites   = []
 
 
 #----------------------------------------------------------------------------------------------#
