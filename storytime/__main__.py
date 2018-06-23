@@ -71,64 +71,6 @@ def console( verbose ) :
 
 
 #----------------------------------------------------------------------------------------------#
-###     start a game
-##############################
-
-def raise_sys_exit( ) :
-    """Called inside interactive console to return to player_function"""
-    raise SystemExit
-extra_locals = { "exit" : raise_sys_exit }  # other locals go in here
-
-def interactive_interpreter( local_vars:dict ) :
-    """Enter the interactive interpreter"""
-
-    local_vars.update(extra_locals)
-    #try :
-    code.interact( local=local_vars )
-    #except SystemExit :
-     #   pass
-
-
-##############################
-class CommandWord:
-    def __init__(self, func):
-        self.func = func
-    def __repr__(self):
-        self.func()
-    def __str__(self):
-        return f'<CommandWord {self.func.__name__}>'
-
-def commandword(func):
-    return CommandWord(func)
-
-
-##############################
-async def starter(auto):
-
-    this        = await curio.current_task()
-
-    engine      = Simulation(scenario.Test(), realtime=auto)
-    timer       = await curio.spawn(engine.timer())
-
-    ### quality-of-life
-    @commandword
-    def q():
-        raise SystemExit
-
-    ### spawn task to run python repl in a thread
-    controller:curio.Task  = await curio.spawn(curio.run_in_thread(
-        interactive_interpreter, {**globals(),**locals()}
-    ))
-
-    ### wait
-    try:
-        while True:
-            await curio.sleep(10)
-    except SystemExit:
-        controller.join()
-
-
-#----------------------------------------------------------------------------------------------#
 
 @console.command( 'game' )
 @click.argument( 'game_name',             default = 'game')
@@ -138,7 +80,7 @@ async def starter(auto):
 def game( outer_env, game_name, with_monitor, auto) :
     ''' create new boxtree instance in target directory using a root template
     '''
-
+    from .starter import starter
     curio.run(starter, auto,
         with_monitor = with_monitor,
     )
