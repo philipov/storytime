@@ -8,7 +8,7 @@ description
 import storytime
 import storytime.examples
 
-#----------------------------------------------------------------------#
+#----------------------------------------------------------------------------------------------#
 
 class FantasySphere( storytime.PhysicalLaws ) :
     """callbacks for physical process"""
@@ -50,7 +50,7 @@ class FantasySphere( storytime.PhysicalLaws ) :
         pass
 
 
-#----------------------------------------------------------------------#
+#----------------------------------------------------------------------------------------------#
 
 def main( ) :
     ### begin

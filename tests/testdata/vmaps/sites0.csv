@@ -1,0 +1,5 @@
+#Location(x, y, name)
+1,1,One
+2,2,Two
+1,2,Three
+2,1,Four

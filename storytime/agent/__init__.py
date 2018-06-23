@@ -1,19 +1,21 @@
-
+# storytime.agent
 
 '''
-story-based game simulation library
 '''
 
 #----------------------------------------------------------------------------------------------#
 
-from .__setup__ import __version__
+from ._agent import Agent
 
-from .simulation import Simulation
+from .belief import Belief
 
-from . import agent
-from . import world
-from . import scenario
+from .move import Move
+from .plan import Plan
 
+from .trait import (
+    Trait,
+    Reproduction,
+)
 
 #----------------------------------------------------------------------------------------------#
 

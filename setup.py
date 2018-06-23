@@ -1,63 +1,16 @@
 #!python
-#-- setup.py -- cogwright
+#-- setup.py -- smash
 
-"""
-"""
+#----------------------------------------------------------------------------------------------#
 
 from setuptools import setup
-from pathlib import Path
+from storytime.__setup__ import options
+import os
 
-#----------------------------------------------------------------------#
+with open( os.path.join( os.path.dirname( __file__ ), 'DESCRIPTION.rst' ) ) as r_file :
+    long_description = r_file.read()
 
-###
-PROJECT_PATH = Path( '.' ).resolve( )
-PROJECT_NAME = PROJECT_PATH.name
-
-###
-from __version__ import __version__
-
-###
-__description__ = "".join(list(open(str(PROJECT_PATH/'DESCRIPTION'))))
+setup( **options, long_description=long_description )
 
 
-#----------------------------------------------------------------------#
-
-###
-setup(
-    name            = PROJECT_NAME,
-    packages        = ['storytime', 'storytime.entities', 'storytime.spatial'],
-    version         = __version__,
-
-    description     = __description__,
-    url             = 'https://github.com/philipov/storytime',
-
-    author          = 'Philip Loguinov',
-    author_email    = 'philipov@gmail.com',
-
-    entry_points={
-        'console_scripts' : [ "".join([ 'cog', '=', PROJECT_NAME, '.__main__.main' ]) ],
-    },
-
-    requires = ['numpy', 'scipy', 'sympy' ],
-
-    classifiers=[
-        'Environment :: Console',
-        'Environment :: Other Environment',
-
-        'Intended Audience :: Information Technology',
-        'Intended Audience :: Developers',
-        'Intended Audience :: System Administrators',
-        'Intended Audience :: End Users/Desktop',
-        'Intended Audience :: Customer Service',
-
-        'License :: Other/Proprietary License',
-
-        'Operating System :: Microsoft :: Windows :: Windows 7',
-        'Operating System :: POSIX :: Linux',
-
-        'Programming Language :: Python :: 3.6',
-    ],
-)
-
-
-#----------------------------------------------------------------------#
+#----------------------------------------------------------------------------------------------#

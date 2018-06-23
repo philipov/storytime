@@ -4,90 +4,149 @@
 application entry point
 '''
 
-###
+
+from powertools import AutoLogger
+log = AutoLogger()
+##############################
+from powertools import term
+from powertools import click
+from powertools.print import pprint
+
 import os
-import sys
-import traceback
-
 from pathlib import Path
+from collections import namedtuple
 
-import colorama
+import code
+import curio
+import curio.monitor
 
-colorama.init( )
-import colored_traceback
-
-colored_traceback.add_hook( )
-
-###
-import logging
-
-log = logging.getLogger( name='smash.__main__' )
-logging.basicConfig( level=logging.DEBUG )
-# debug   = lambda *a, **b : log.debug( ''.join( str(arg) for arg in a ))
-# info    = lambda *a, **b : log.info(  ''.join( str(arg) for arg in a ))
-debug = print
-info = print
-# debug = lambda *a, **b : None
-
-###
-__all__ = []
-
-#----------------------------------------------------------------------#
-
-from . import cmdline
-from . import modes
-
-def main( args: cmdline.Arguments ) :
-    # ToDo: initialize logging: stdout/stderr redirect
-    # ToDo: handle dev mode
-    # ToDo: manage env list
-    # ToDo: manage package list
+from .__setup__ import __version__
+from .simulation import Simulation
+from . import scenario
 
 
-    info( '~~~~~~~~~~~~~~~~~~~~ SMASH' )
-    info( 'SCRIPT:  ', __file__ )
-    info( 'VERBOSE: ', args.verbose )
+#----------------------------------------------------------------------------------------------#
 
-    workdir = Path( os.getcwd( ) )
-    info( 'CWD:     ', workdir )
-    info( '' )
+term.init_color()
 
+CONTEXT_SETTINGS = dict(
+    help_option_names   = ['-h', '--help'],
+    terminal_width      = 97,
+    max_content_width   = 97,
+    color               = True
+)
 
-    info( 'MODE:    ', args.mode )
-    info( 'TARGET:  ', args.target )
-    info( '' )
-    do_func = getattr( modes
-                       , 'do_' + args.mode
-                       , modes.__default__
-                       )
-
-    result = do_func( args.target
-                      , verbose=args.verbose
-                      , workdir=workdir
-                      , duration=args.duration
-                      )
-
-    debug( '' )
-    info( 'SMASH DONE...' )
-    return result
 
 ##############################
-def run( args=None ) :
-    '''bind main to command-line argmuntes; print exceptions'''
+@click.group(               'storytime',
+    context_settings        = CONTEXT_SETTINGS,
+    cls                     = click.Group
+)
+@click.version_option(
+    __version__,
+    '--version', '-V',
+    prog_name = 'storytime'
+)
+@click.option(
+    '--verbose', '-v',
+    default = False,
+    is_flag = True,
+    help    = 'Display additional logging information.'
+)
+@click.contextmanager
+def console( verbose ) :
+    ''' storytime console interface
+    '''
+    if verbose:
+        log.setDebug()
 
-    try :
-        if args is None :
-            args = sys.argv[1 :]
-        return main( cmdline.parse( args ) )
+    log.print( term.cyan( '\n~~~~~~~~~~~~~~~~~~~~ ' ), term.pink( 'STORYTIME') )
+    log.print( 'SCRIPT:  ', __file__ )
+    cwd = Path( os.getcwd() )
+    log.print( 'WORKDIR: ', cwd, '\n' )
 
-    except Exception as err :
-        traceback.print_tb( err.__traceback__ )
-        print( sys.exc_info( )[0].__name__ + ':', err )
-        input( '\nPress ENTER to continue...' )
+    result = yield
+
+    log.print( '\n', term.pink( '~~~~~~~~~~~~~~~~~~~~' ), term.cyan(' DONE'), '.' )
+
+
+#----------------------------------------------------------------------------------------------#
+###     start a game
+##############################
+
+def raise_sys_exit( ) :
+    """Called inside interactive console to return to player_function"""
+    raise SystemExit
+extra_locals = { "exit" : raise_sys_exit }  # other locals go in here
+
+def interactive_interpreter( local_vars:dict ) :
+    """Enter the interactive interpreter"""
+
+    local_vars.update(extra_locals)
+    #try :
+    code.interact( local=local_vars )
+    #except SystemExit :
+     #   pass
+
 
 ##############################
-if __name__ == '__main__' :
-    run( )
+class CommandWord:
+    def __init__(self, func):
+        self.func = func
+    def __repr__(self):
+        self.func()
+    def __str__(self):
+        return f'<CommandWord {self.func.__name__}>'
+
+def commandword(func):
+    return CommandWord(func)
 
 
-#----------------------------------------------------------------------#
+##############################
+async def starter(auto):
+
+    this        = await curio.current_task()
+
+    engine      = Simulation(scenario.Test(), realtime=auto)
+    timer       = await curio.spawn(engine.timer())
+
+    ### quality-of-life
+    @commandword
+    def q():
+        raise SystemExit
+
+    ### spawn task to run python repl in a thread
+    controller:curio.Task  = await curio.spawn(curio.run_in_thread(
+        interactive_interpreter, {**globals(),**locals()}
+    ))
+
+    ### wait
+    try:
+        while True:
+            await curio.sleep(10)
+    except SystemExit:
+        controller.join()
+
+
+#----------------------------------------------------------------------------------------------#
+
+@console.command( 'game' )
+@click.argument( 'game_name',             default = 'game')
+@click.option(   '-m', '--with_monitor',  default = False, is_flag=True)
+@click.option(   '-a', '--auto',          default = False, is_flag=True)
+@click.pass_obj
+def game( outer_env, game_name, with_monitor, auto) :
+    ''' create new boxtree instance in target directory using a root template
+    '''
+
+    curio.run(starter, auto,
+        with_monitor = with_monitor,
+    )
+
+
+##############################
+if __name__ == '__main__':
+    console()
+
+
+#----------------------------------------------------------------------------------------------#

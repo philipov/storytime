@@ -3,10 +3,11 @@
 @ECHO off
 rem ---------------------------------
 
-set PROJECT_NAME=smash
+set PROJECT_NAME=storytime
 set CMD=rmdir /S /Q
 @ECHO on
 
+%CMD% build
 %CMD% tests\.cache
 %CMD% tests\__tmp__
 %CMD% tests\__pycache__

@@ -1,0 +1,12 @@
+vmap:
+  type:   Vector2D
+  len_x:  4
+  len_y:  4
+sites:
+  type:   Location
+  data:
+      #x, y, name
+    - [1, 1, One]
+    - [2, 2, Two]
+    - [1, 2, Three]
+    - [2, 1, Four]
