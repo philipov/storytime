@@ -8,26 +8,26 @@ log = AutoLogger()
 ##############################
 
 from .world import World
-from .agent import Agent
-
 
 #----------------------------------------------------------------------------------------------#
 
+
 class Scenario:
-    ''' generate a world
-        populate it with actors
+    ''' base class for defining game instantiation and rules
+        subclasses must provide an implementation for create_world()
     '''
 
-    def __init__(self, world_class=World):
-        self.actors = dict()
-        self.world  = world_class()
+    __world__ = World
+
+    def __init__(self,
+                 *args, **kwargs):
+        self.world  = type(self).__world__(*args, **kwargs)
         self.create_world()
 
+
+    #########################
     def create_world(self):
         raise NotImplementedError()
-
-    def add_actor(self, actor_cls, *args, **kwargs):
-        pass
 
 
 #----------------------------------------------------------------------------------------------#
@@ -35,8 +35,8 @@ class Scenario:
 class Test(Scenario):
     ''' test case
     '''
-
     def create_world(self):
-        self.actors[(Agent,1)] = Agent()
-        self.actors[(Agent,2)] = Agent()
+        self.world.add_agent()
+        self.world.add_agent()
+        self.world.add_agent()
 

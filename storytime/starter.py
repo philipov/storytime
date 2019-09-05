@@ -27,7 +27,7 @@ class CommandWord:
     def __init__(self, func):
         self.func = func
     def __repr__(self):
-        self.func()
+        return str(self.func())
     def __str__(self):
         return f'<CommandWord {self.func.__name__}>'
 
@@ -61,8 +61,6 @@ async def starter(auto):
             await curio.sleep(10)
     except SystemExit:
         controller.join()
-
-
 
 
 #----------------------------------------------------------------------------------------------#

@@ -8,8 +8,11 @@ log = AutoLogger()
 ##############################
 
 import curio
+from collections import namedtuple
+from .trait import Trait
 
 #----------------------------------------------------------------------------------------------#
+
 
 class Agent:
     ''' Agent.planner:
@@ -24,7 +27,8 @@ class Agent:
         The frequency with which Agent.planner is called depends on the Simulator.timer
     '''
 
-    def __init__(self):
+    def __init__(self, index):
+        self.index      = index
         self.traits     = dict()
         self.beliefs    = dict()
         self.plans      = dict()
@@ -35,6 +39,15 @@ class Agent:
 
         while True:
             world = await prompter()
+
+            for trait in self.traits.values():
+                trait:Trait
+                result = trait.apply(world)
+                if result is not None:
+                    break
+
             await curio.sleep(0.1)
+
+
 
 #----------------------------------------------------------------------------------------------#

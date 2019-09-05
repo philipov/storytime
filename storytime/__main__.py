@@ -72,18 +72,27 @@ def console( verbose ) :
 
 #----------------------------------------------------------------------------------------------#
 
-@console.command( 'game' )
+@console.command( 'run' )
 @click.argument( 'game_name',             default = 'game')
 @click.option(   '-m', '--with_monitor',  default = False, is_flag=True)
 @click.option(   '-a', '--auto',          default = False, is_flag=True)
 @click.pass_obj
-def game( outer_env, game_name, with_monitor, auto) :
-    ''' create new boxtree instance in target directory using a root template
+def run( outer_env, game_name, with_monitor, auto) :
+    '''
     '''
     from .starter import starter
     curio.run(starter, auto,
         with_monitor = with_monitor,
     )
+
+
+@console.command( 'make' )
+@click.argument( 'game_name',             default = 'game')
+@click.pass_obj
+def make( outer_env, game_name, with_monitor, auto) :
+    '''
+    '''
+
 
 
 ##############################

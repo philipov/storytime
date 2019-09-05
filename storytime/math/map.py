@@ -71,8 +71,13 @@ class Location:
 
 #----------------------------------------------------------------------------------------------#
 
+class Field:
+    def __init__(self, *args, **kwargs):
+        pass
+
+
 ##############################
-class VorMap2D:
+class VorMap2D(Field):
     ''' 2D voronoi tiling
         immutable, update methods return a new instance
         line and vertex calculation
@@ -91,6 +96,7 @@ class VorMap2D:
         *,
         sites:dict  = None,
     ):
+        super().__init__()
         self._len_x     = len_x
         self._len_y     = len_y
 
